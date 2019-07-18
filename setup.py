@@ -1,5 +1,7 @@
 from setuptools import find_packages, setup
 
+import versioneer
+
 KEYWORDS = (
     "PyUpdater Pyinstaller Auto Update AutoUpdate Auto-Update Esky simple updater mac/updater windows/updater "
     "updater4pyi bbfreeze ccfreeze freeze cz_freeze pyupdate"
@@ -15,14 +17,15 @@ with open("README.md", "r") as f:
 
 
 setup(
-    name="JustFuckingUpdate",
-    version="0.0.1",
-    description="Tired of complex updaters that doesn't work. Use JustFuckingUpdate, that uses os native solutions to perform the update.",
+    name="JustUpdate",
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
+    description="Tired of complex updaters that doesn't work. Use JustUpdate, that uses os native solutions to perform the update.",
     long_description=readme,
     long_description_content_type="text/markdown",
     author="NicklasMCHD",
-    url="https://www.justfuckingupdate.org",
-    download_url=("https://github.com/NicklasMCHD/JustFuckingUpdate/archive/master.zip"),
+    url="https://github.com/NicklasMCHD/JustUpdate",
+    download_url=("https://github.com/NicklasMCHD/JustUpdate/archive/master.zip"),
     license="MIT",
     keywords=KEYWORDS,
     zip_safe=False,
@@ -32,7 +35,7 @@ setup(
     packages=find_packages(),
     entry_points="""
     [console_scripts]
-    jfu=justfuckingupdate.cli:main
+    justupdate=justupdate.cli:main
     """,
     classifiers=[
         "Development Status :: 4 - Beta",

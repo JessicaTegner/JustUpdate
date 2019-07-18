@@ -1,0 +1,3 @@
+productbuild --scripts "FOLDER_TO_SCRIPTS" --component cool.app /Applications Cool.pkg
+
+osascript -e 'do shell script "installer -pkg Cool.pkg -target /" with prompt "Cool WANTS TO make changes" with administrator privileges'

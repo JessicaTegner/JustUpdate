@@ -1,0 +1,18 @@
+#1:
+command:
+justupdate build
+
+Rename the generated .exe and windows manifest file from win.exe and win.exe.manifest to %APP_NAME%.exe and %APP_NAME%.exe.manifest
+Posible solutions:
+make the user supply the wanted .exe name (not recommented)
+Asume the name from APP_NAME (most likely solution)
+Note: Same problem will be on the mac side, and it could be a bit trickier to resolve (look at PyUpdater/utils/builder._build(), for when that time comes).
+
+#2
+Metadata.
+The metadata file aren't splitted up pr platform.
+Right now the metadata file is one file.
+Desired behavior is that a metadata file is created pr platform.
+So the metadata files name becomes metadata.PLATFORM_NAME_SHORT.ju
+
+

@@ -6,7 +6,13 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-ecdsa = "*"
+versioneer = "*"
+pytest = "*"
+appdirs = "*"
+pycryptodomex = "*"
+scp = "*"
+paramiko = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
