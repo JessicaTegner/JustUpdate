@@ -1,5 +1,7 @@
 from setuptools import find_packages, setup
 
+import versioneer
+
 KEYWORDS = (
     "PyUpdater Pyinstaller Auto Update AutoUpdate Auto-Update Esky simple updater mac/updater windows/updater "
     "updater4pyi bbfreeze ccfreeze freeze cz_freeze pyupdate"
@@ -16,7 +18,8 @@ with open("README.md", "r") as f:
 
 setup(
     name="JustFuckingUpdate",
-    version="0.0.1",
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     description="Tired of complex updaters that doesn't work. Use JustFuckingUpdate, that uses os native solutions to perform the update.",
     long_description=readme,
     long_description_content_type="text/markdown",

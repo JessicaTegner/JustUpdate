@@ -2,6 +2,8 @@ import logging
 from logging.config import dictConfig
 import time
 
+from justfuckingupdate import __version__
+
 def setup_logging():
 	logging.getLogger().name = __name__
 	current_time = time.strftime("%Y:%m:%d-%H:%M:%S")
@@ -25,4 +27,4 @@ def setup_logging():
 
 def main():
 	setup_logging()
-	logging.info("JustFuckingUpdate")
+	logging.info(f"JustFuckingUpdate - {__version__}.")
