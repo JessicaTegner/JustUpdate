@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: JustFuckingUpdate
+Version: 0.0.1
+Summary: Tired of complex updaters that doesn't work. Use JustFuckingUpdate, that uses os native solutions to perform the update.
+Home-page: https://www.justfuckingupdate.org
+Author: NicklasMCHD
+License: MIT
+Download-URL: https://github.com/NicklasMCHD/JustFuckingUpdate/archive/master.zip
+Description: # Just. Fucking. Update
+        Just. Fucking. Update, is a updater system, written in python, that utilizes each platforms native method of installing an application, to perform an update.
+        * On windows, JFU uses NSIS (nullsoft scriptable install system) to perform the update.
+        * On Mac, JFU uses the pkg mechanics to perform the update.
+        
+        ### Requirements.
+        * Python3.
+        * pip install -r requirements.txt
+        * For windows: NSIS version 3x.
+        * For Mac: the pkgbuild command available (can be installed by running the command in the terminal, or by installing xCode developer tools).
+        
+Keywords: PyUpdater Pyinstaller Auto Update AutoUpdate Auto-Update Esky simple updater mac/updater windows/updater updater4pyi bbfreeze ccfreeze freeze cz_freeze pyupdate
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.4
+Description-Content-Type: text/markdown

@@ -1,0 +1,12 @@
+README.md
+setup.py
+JustFuckingUpdate.egg-info/PKG-INFO
+JustFuckingUpdate.egg-info/SOURCES.txt
+JustFuckingUpdate.egg-info/dependency_links.txt
+JustFuckingUpdate.egg-info/entry_points.txt
+JustFuckingUpdate.egg-info/not-zip-safe
+JustFuckingUpdate.egg-info/requires.txt
+JustFuckingUpdate.egg-info/top_level.txt
+justfuckingupdate/__init__.py
+justfuckingupdate/cli/__init__.py
+justfuckingupdate/core/__init__.py
