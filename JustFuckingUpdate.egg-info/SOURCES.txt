@@ -1,5 +1,8 @@
+MANIFEST.in
 README.md
+setup.cfg
 setup.py
+versioneer.py
 JustFuckingUpdate.egg-info/PKG-INFO
 JustFuckingUpdate.egg-info/SOURCES.txt
 JustFuckingUpdate.egg-info/dependency_links.txt
@@ -8,5 +11,11 @@ JustFuckingUpdate.egg-info/not-zip-safe
 JustFuckingUpdate.egg-info/requires.txt
 JustFuckingUpdate.egg-info/top_level.txt
 justfuckingupdate/__init__.py
+justfuckingupdate/_version.py
 justfuckingupdate/cli/__init__.py
+justfuckingupdate/cli/commands.py
+justfuckingupdate/cli/helper.py
 justfuckingupdate/core/__init__.py
+justfuckingupdate/core/base.py
+justfuckingupdate/core/config.py
+justfuckingupdate/core/executor.py

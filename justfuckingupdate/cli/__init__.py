@@ -1,30 +1,40 @@
 import logging
-from logging.config import dictConfig
-import time
+import sys
 
 from justfuckingupdate import __version__
+from justfuckingupdate.cli.helper import get_parser, setup_logging
 
-def setup_logging():
-	logging.getLogger().name = __name__
-	current_time = time.strftime("%Y:%m:%d-%H:%M:%S")
-	logging_config = dict(
-	version = 1,
-	formatters = {
-		'f': {'format':
-			  '%(name)s %(levelname)-2s %(message)s | %(asctime)s'}
-		},
-	handlers = {
-		'h': {'class': 'logging.StreamHandler',
-			  'formatter': 'f',
-			  'level': logging.DEBUG}
-		},
-		root = {
-		'handlers': ['h'],
-		'level': logging.DEBUG,
-		},
-)
-	dictConfig(logging_config)
+from justfuckingupdate.cli import commands
 
-def main():
-	setup_logging()
+def _real_main(args):
+	parser = get_parser()
+	args, extra = parser.parse_known_args(args)
 	logging.info(f"JustFuckingUpdate - {__version__}.")
+	result = dispatch_command(args, extra)
+	if result == False:
+		parser.print_help()
+		sys.exit()
+
+def dispatch_command(args, extra=None):
+	if args.command is None:
+		return False
+	cmd_str = "_cmd_" + args.command.replace("-", "_")
+	if hasattr(commands, cmd_str):
+		cmd = getattr(commands, cmd_str)
+		return cmd(args, extra)
+
+def main(args=None):
+	setup_logging()
+	try:
+		_real_main(args)
+	except KeyboardInterrupt:
+		# abborted by user
+		print("\n")
+		log.warning("Abborted by user.")
+	except Exception as err:
+		print(err)
+		logging.error(err)
+		logging.debug(err, exc_info=True)
+
+if __name__ == "__main__":
+	main(sys.argv[1:])

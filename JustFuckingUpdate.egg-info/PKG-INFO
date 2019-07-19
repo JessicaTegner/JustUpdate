@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: JustFuckingUpdate
-Version: 0.0.1
+Version: 0+untagged.2.g9e96c63.dirty
 Summary: Tired of complex updaters that doesn't work. Use JustFuckingUpdate, that uses os native solutions to perform the update.
 Home-page: https://www.justfuckingupdate.org
 Author: NicklasMCHD
