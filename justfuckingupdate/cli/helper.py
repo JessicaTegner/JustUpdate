@@ -29,6 +29,7 @@ def get_parser():
 	subparser = _make_subparser(parser)
 	add_version_parser(subparser)
 	add_init_parser(subparser)
+	add_clean_parser(subparser)
 	add_build_parser(subparser)
 	add_spec_parser(subparser)
 	return parser
@@ -45,7 +46,10 @@ def add_version_parser(subparsers):
 	version_parser = subparsers.add_parser("version", help="Show version")
 
 def add_init_parser(subparsers):
-	init_parser = subparsers.add_parser("init", help="Initialize a JustFuckingUpdate repository in the current directory.")
+	init_parser = subparsers.add_parser("init", help="Initialize a JustFuckingUpdate repository at the current location.")
+
+def add_clean_parser(subparsers):
+	clean_parser = subparsers.add_parser("clean", help="Delete the JustFuckingUpdate repository at this location.")
 
 def add_build_parser(subparsers):
 	build_parser = subparsers.add_parser("build", help="Produce a build with PyInstaller from a python file or JustFuckingUpdate spec file.")
