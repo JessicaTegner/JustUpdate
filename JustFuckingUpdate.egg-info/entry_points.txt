@@ -1,4 +1,0 @@
-
-    [console_scripts]
-    jfu=justfuckingupdate.cli:main
-    

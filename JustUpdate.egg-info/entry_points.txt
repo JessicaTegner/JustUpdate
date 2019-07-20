@@ -1,0 +1,4 @@
+
+    [console_scripts]
+    justupdate=justupdate.cli:main
+    

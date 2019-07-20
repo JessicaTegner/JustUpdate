@@ -1,11 +1,11 @@
 Metadata-Version: 2.1
-Name: JustFuckingUpdate
-Version: 0+untagged.2.g9e96c63.dirty
-Summary: Tired of complex updaters that doesn't work. Use JustFuckingUpdate, that uses os native solutions to perform the update.
-Home-page: https://www.justfuckingupdate.org
+Name: JustUpdate
+Version: 0+untagged.6.g4030f88.dirty
+Summary: Tired of complex updaters that doesn't work. Use JustUpdate, that uses os native solutions to perform the update.
+Home-page: https://www.justwork.org/justupdate
 Author: NicklasMCHD
 License: MIT
-Download-URL: https://github.com/NicklasMCHD/JustFuckingUpdate/archive/master.zip
+Download-URL: https://github.com/JustWork/JustUpdate/archive/master.zip
 Description: # Just. Fucking. Update
         Just. Fucking. Update, is a updater system, written in python, that utilizes each platforms native method of installing an application, to perform an update.
         * On windows, JFU uses NSIS (nullsoft scriptable install system) to perform the update.
