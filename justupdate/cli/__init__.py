@@ -1,15 +1,15 @@
 import logging
 import sys
 
-from justfuckingupdate import __version__
-from justfuckingupdate.cli.helper import get_parser, setup_logging
+from justupdate import __version__
+from justupdate.cli.helper import get_parser, setup_logging
 
-from justfuckingupdate.cli import commands
+from justupdate.cli import commands
 
 def _real_main(args):
 	parser = get_parser()
 	args, extra = parser.parse_known_args(args)
-	logging.info(f"JustFuckingUpdate - {__version__}.")
+	logging.info(f"JustUpdate - {__version__}.")
 	result = dispatch_command(args, extra)
 	if result == False:
 		parser.print_help()

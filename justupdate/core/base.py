@@ -1,15 +1,24 @@
+import os
 import logging
 import platform
+import justupdate
 
 # Miss variables and functions.
-class JFU():
-	JFU_FOLDER_NAME = "jfu"
+class JustUpdateConstants():
+	REPO_FOLDER = "ju-repo"
+	MODULE_FOLDER = os.path.dirname(os.path.abspath(justupdate.__file__))
 
 def is_windows():
-	return platform.System() == "Windows"
+	return platform.system() == "Windows"
 
 def is_mac():
-	return platform.System() == "Darwin"
+	return platform.system() == "Darwin"
+
+def get_platform_name_short():
+	if is_windows():
+		return "win"
+	if is_mac():
+		return "mac"
 
 def prompt(question, default="", allow_empty=False):
 	while True:
@@ -35,4 +44,3 @@ def confirmation(question, default):
 			return False
 		else:
 			logging.warning(f"Invalid value \"result\". Please either enter \"y\" or \"n\".")
-
