@@ -1,2 +1,3 @@
 include versioneer.py
-include justfuckingupdate/_version.py
+include justupdate/_version.py
+recursive-include justupdate/templates *.*
