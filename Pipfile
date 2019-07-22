@@ -8,6 +8,10 @@ verify_ssl = true
 [packages]
 versioneer = "*"
 pytest = "*"
+appdirs = "*"
+pycryptodomex = "*"
+scp = "*"
+paramiko = "*"
 
 [requires]
 python_version = "3.7"
