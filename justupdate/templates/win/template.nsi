@@ -10,19 +10,19 @@
 
 ; DO NOT CHANGE THE BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!!
 ;--------------------------------
-!addplugindir "${NSISDIR}\Plugins\x86-unicode"
+!addplugindir "%JustUpdateRepository%\templates\win\data\x86-ansi"
+!addplugindir "%JustUpdateRepository%\templates\win\data\x86-unicode"
 
 ;Include Modern UI
   !include "MUI2.nsh"
-!include 'StdUtils.nsh'
-  !include "zipdll.nsh"
+  !include LogicLib.nsh
 
 !define APPNAME "%APP_NAME%"
 !define COMPANYNAME "%APP_AUTHOR%"
 !define VERSION "%VERSION%"
 
   Name "${APPNAME}"
-  OutFile "${APPNAME}-${VERSION}.exe"
+  OutFile "%JustUpdateRepository%\new\${APPNAME}-%PRETTY_VERSION%.exe"
   BrandingText "${APPNAME} updater"
   autoclosewindow true
   InstallDir "${WHERE_TO_INSTALL}\${COMPANYNAME}\${APPNAME}"
@@ -33,16 +33,18 @@ VIAddVersionKey "LegalCopyright" "Copyright ${COMPANYNAME}"
 VIAddVersionKey "ProductVersion" "${VERSION}"
 
   ;Request application privileges for Windows Vista
-  RequestExecutionLevel user
+  RequestExecutionLevel admin
 
   !define MUI_ABORTWARNING
-  !insertmacro MUI_LANGUAGE "English" ;first language is the default language
 
   !insertmacro MUI_PAGE_INSTFILES
     Page custom launchprogram
 
+  !insertmacro MUI_LANGUAGE "English" ;first language is the default language
+
+
 Function launchprogram
-ExecShell "" '"$INSTDIR\4{PROGRAM_EXECUTABLE}"'  
+ExecShell "" '"$INSTDIR\${PROGRAM_EXECUTABLE}"'  
 FunctionEnd
 
 ;Installer Sections
@@ -54,6 +56,6 @@ Section "${APPNAME}" Main
   SetOutPath "$INSTDIR"
 
   SetOverwrite ifnewer
-  File /r ../dist/win\*.*
+  File /r %JustUpdateRepository%/dist/win\*.*
 
 SectionEnd
