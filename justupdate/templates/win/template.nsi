@@ -27,11 +27,6 @@
   autoclosewindow true
   InstallDir "${WHERE_TO_INSTALL}\${COMPANYNAME}\${APPNAME}"
 
-    VIProductVersion "${VERSION}"
-VIAddVersionKey "ProductName" "${APPNAME}"
-VIAddVersionKey "LegalCopyright" "Copyright ${COMPANYNAME}"
-VIAddVersionKey "ProductVersion" "${VERSION}"
-
   ;Request application privileges for Windows Vista
   RequestExecutionLevel admin
 

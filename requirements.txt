@@ -1,1 +1,5 @@
 versioneer
+appdirs
+scp
+paramiko
+requests

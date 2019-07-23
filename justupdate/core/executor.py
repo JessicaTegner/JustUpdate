@@ -1,7 +1,7 @@
 import os
 import logging
 import subprocess
-from justupdate.core.base import is_windows, is_mac
+from justupdate.core.base import get_platform_name_short
 
 class CommandType():
 	"""The type of command, that the command executor should execute"""
@@ -22,12 +22,17 @@ class CommandExecutor():
 			except FileNotFoundError:
 				return False
 		if type == CommandType.EXECUTE_UPDATE_FILE:
-			# os specific.
-			pass
+			cmd = getattr(self, f"_execute_update_{get_platform_name_short()}")
+			return cmd(*arg)
 
 	def _run_platform_agnostic_command(self, cmd, stdin):
 		logging.debug("Executing command {}".format(" ".join(cmd)))
 		result = subprocess.run(cmd, input=stdin, stderr=subprocess.STDOUT, stdout=subprocess.PIPE, universal_newlines=True)
 		return result.returncode, result.stdout
 
+	def _execute_update_win(self, folder, app_name, version):
+		return subprocess.Popen(["powershell.exe", "Start-Process", os.path.join(folder, app_name+"-"+version+".exe"), "-Verb", "runAs"])
+
+	def _execute_update_mac(self, app_name, version):
+		pass
 

@@ -24,7 +24,10 @@ def _cmd_init(args, extra=None):
 	app_name = prompt("Application Name:", "MyAwezomeApp")
 	app_author = prompt("Application Author:", "MyAwesomeCompany")
 	update_url = prompt("Url to ping for updates:")
+	client_config_dir = prompt("Where to place the client_config.py file (used by your application): ", default=".")
 	
+	if update_url.endswith("/") == False:
+		update_url += "/"
 	logging.info("Creating folder structure.")
 	os.makedirs(JustUpdateConstants.REPO_FOLDER)
 	logging.info("Creating config.")
@@ -37,6 +40,14 @@ def _cmd_init(args, extra=None):
 	logging.info("Copying templates.")
 	shutil.copytree(os.path.join(JustUpdateConstants.MODULE_FOLDER, "templates"), os.path.join(JustUpdateConstants.REPO_FOLDER, "templates"))
 	logging.info("Templates copied.")
+	logging.info("Creating client config.")
+	client_config_data = """class ClientConfig():
+	app_name = "{}"
+	app_author = "{}"
+	update_url = "{}"
+""".format(app_name, app_author, update_url)
+	with open(os.path.join(client_config_dir, "client_config.py"), "w") as cc:
+		cc.write(client_config_data)
 	logging.info("Initialization done.")
 
 def _cmd_clean(args, extra=None):

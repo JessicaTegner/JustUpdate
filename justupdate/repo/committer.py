@@ -60,7 +60,8 @@ class Committer():
 		logging.info("Calculating checksum.")
 		checksum = data_manager.calculate_checksum(os.path.join(JustUpdateConstants.REPO_FOLDER, "new", "{0}-{1}.exe".format(self.config.get("app_name"), self.version.to_string())))
 		logging.info("Looking for existing metadata.")
-		md = MetaData(get_platform_name_short())
+		md = MetaData()
+		md.load()
 		md.add_metadata("{0}-{1}.exe".format(self.config.get("app_name"), self.version.to_string()), checksum, self.version.to_string())
 		logging.info("Saving updated metadata.")
 		md.save() # The updated metadata is saved to "ju-repo/deploy/metadata.ju".

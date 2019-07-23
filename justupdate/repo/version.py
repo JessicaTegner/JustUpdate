@@ -1,10 +1,10 @@
 class Version():
 	"""This class converts the JFU version numbers to and from strings"""
 	def __init__(self, version):
-		self.raw_version = self.from_string(version)
 		self.is_stable = False
 		self.is_beta = False
 		self.is_alpha = False
+		self.raw_version = self.from_string(version)
 	
 	def to_nsis_compliant(self):
 		return ".".join(self.raw_version)
