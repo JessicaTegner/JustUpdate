@@ -4,6 +4,7 @@ import stat
 
 from justupdate.core.base import JustUpdateConstants, get_platform_name_short
 from justupdate.core.config import Config
+from justupdate.core.executor import CommandExecutor, CommandType
 
 def prepare_template(version):
 	config = Config()
@@ -49,7 +50,13 @@ def _prepare_template_mac(version, config):
 	postinstall.write(data)
 	postinstall.close()
 	# make sure postinstall script are executable.
-	st = os.stat(os.path.join(JustUpdateConstants.REPO_FOLDER, "templates", "mac", "scripts", "postinstall.sh"))
-	os.chmod(os.path.join(JustUpdateConstants.REPO_FOLDER, "templates", "mac", "scripts", "postinstall.sh"), st.st_mode | 0o111)
+	#st = os.stat(os.path.join(JustUpdateConstants.REPO_FOLDER, "templates", "mac", "scripts", "postinstall.sh"))
+	#os.chmod(os.path.join(JustUpdateConstants.REPO_FOLDER, "templates", "mac", "scripts", "postinstall.sh"), st.st_mode | 0o111)
+	executor = CommandExecutor()
+	cmd = ["chmod", "x+", os.path.join(JustUpdateConstants.REPO_FOLDER, "templates", "mac", "scripts", "postinstall.sh")]
+	result, stdout = executor.execute(cmd, CommandType.Raw)
+	if result > 0:
+		print(stdout)
+		sys.exit()
 
 
