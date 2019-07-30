@@ -148,9 +148,10 @@ class JustUpdateClient():
 			with open(local_filename, 'wb') as f:
 				for chunk in r.iter_content(chunk_size=8192): 
 					if chunk: # filter out keep-alive new chunks
-						total = int(r.headers.get('content-length', 0))
-						status = {"total": total, "percentage": round(len(chunk)/total*100, 0), "item": file}
 						f.write(chunk)
+						total = int(r.headers.get('content-length', 0))
+						current = os.fstat(f.fileno()).st_size
+						status = {"total": total, "percentage": round(current/total*100, 0), "item": file}
 						downloaded_checksum.update(chunk)
 						if do_callbacks:
 							for callback in self.callbacks:
