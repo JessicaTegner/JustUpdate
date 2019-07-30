@@ -134,7 +134,7 @@ class JustUpdateClient():
 	
 	def _download_update(self, new_version):
 		metadata = self._metadata.get_metadata_for_version(new_version)
-		self._download_file(metadata["filename"])
+		self._download_file(metadata["filename"], metadata["checksum"], True)
 		self._is_downloaded = True
 	
 	def _download_file(self, file, checksum=None, do_callbacks=False):
@@ -142,16 +142,13 @@ class JustUpdateClient():
 			os.makedirs(self._user_data_dir)
 		url = urljoin(self.update_url, file)
 		local_filename = os.path.join(self._user_data_dir, url.split('/')[-1])
-		status = {}
 		downloaded_checksum = hashlib.sha512()
 		with requests.get(url, stream=True) as r:
 			r.raise_for_status()
 			with open(local_filename, 'wb') as f:
-				status["total"] = int(r.headers.get('content-length', 0))
 				for chunk in r.iter_content(chunk_size=8192): 
 					if chunk: # filter out keep-alive new chunks
-						status["percentage"] = round(len(chunk)/status["total"]*100, 0)
-						status["item"] = file
+						status = {"total": int(r.headers.get('content-length', 0)), "percentage": round(len(chunk)/status["total"]*100, 0), "item": file}
 						f.write(chunk)
 						downloaded_checksum.update(chunk)
 						if do_callbacks:
