@@ -1,4 +1,4 @@
 #!/bin/sh
 
-open /Applications/%APP_NAME%.app
+sudo open -a '%APP_NAME%'
 exit 0

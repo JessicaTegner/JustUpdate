@@ -28,15 +28,15 @@ class Builder():
 	
 	def _clean_mac(self):
 		try:
-			shutil.rmtree(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "mac"))
+			shutil.rmtree(os.path.join(os.getcwd(), JustUpdateConstants.REPO_FOLDER, "dist", "mac"))
 		except FileNotFoundError:
 			pass # It's ok if the folder doesn't exist.
 		try:
-			shutil.rmtree(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "{}.app".format(self.config.get("app_name"))))
+			shutil.rmtree(os.path.join(os.getcwd(), JustUpdateConstants.REPO_FOLDER, "dist", "{}.app".format(self.config.get("app_name"))))
 		except FileNotFoundError:
 			pass # It's ok if the folder doesn't exist.
 		try:
-			os.remove(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "mac"))
+			os.remove(os.path.join(os.getcwd(), JustUpdateConstants.REPO_FOLDER, "dist", "mac"))
 		except FileNotFoundError:
 			pass # It's ok if the folder doesn't exist.
 	
