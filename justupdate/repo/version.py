@@ -46,15 +46,18 @@ class Version():
 		if len(self.raw_version) == 3:
 			return "{0}.{1}.{2}".format(*self.raw_version)
 	
+	def _converted_raw_version(self):
+		return list(map(int, self.raw_version))
+	
 	def __eq__(self, other):
-		return self.raw_version == other.raw_version
+		return self._converted_raw_version() == other._converted_raw_version()
 	
 	def __ne__(self, other):
-		return self.raw_version != other.raw_version
+		return self._converted_raw_version() != other._converted_raw_version()
 	
 	def __gt__(self, other):
-		return self.raw_version > other.raw_version
+		return self._converted_raw_version() > other._converted_raw_version()
 	
 	def __lt__(self, other):
-		return self.raw_version < other.raw_version
+		return self._converted_raw_version() < other._converted_raw_version()
 
