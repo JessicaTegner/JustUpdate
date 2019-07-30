@@ -41,7 +41,7 @@ class Builder():
 			pass # It's ok if the folder doesn't exist.
 	
 	def build(self, args, extra_args):
-		cmd = ["pyinstaller", "--distpath", os.path.join(JustUpdateConstants.REPO_FOLDER, "dist"), "--workpath", os.path.join(JustUpdateConstants.REPO_FOLDER, "work"), "-y", args] + extra_args
+		cmd = ["pyinstaller", "--distpath", os.path.join(os.getcwd(), JustUpdateConstants.REPO_FOLDER, "dist"), "--workpath", os.path.join(os.getcwd(), JustUpdateConstants.REPO_FOLDER, "work"), "-y", args] + extra_args
 		executor = CommandExecutor()
 		logging.info("Building.")
 		result, stdout = executor.execute(cmd, CommandType.RAW)
