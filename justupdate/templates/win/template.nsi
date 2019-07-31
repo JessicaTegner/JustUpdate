@@ -52,6 +52,7 @@ FunctionEnd
 Section "${APPNAME}" Main
 
   SetOutPath "$INSTDIR"
+  ExecWait `taskkill /im %APP_NAME%*`
 
   SetOverwrite ifnewer
   File /r %JustUpdateRepository%/dist/win\*.*
