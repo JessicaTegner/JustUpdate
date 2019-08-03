@@ -3,3 +3,4 @@ appdirs
 scp
 paramiko
 requests
+pyinstaller==3.5
