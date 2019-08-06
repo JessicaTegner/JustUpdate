@@ -40,7 +40,7 @@ setup(
         "Development Status :: 4 - Beta",
         "Environment :: Console",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: GNU LGPLv3 License",
+        "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3),
         "Topic :: Software Development :: Build Tools",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3.4",
