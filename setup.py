@@ -19,7 +19,6 @@ with open("README.md", "r") as f:
 setup(
     name="JustUpdate",
     version=versioneer.get_version(),
-    download_url=("https://github.com/NicklasMCHD/JustUpdate/archive/1.0.2.tar.gz"),
     cmdclass=versioneer.get_cmdclass(),
     description="Tired of complex updaters that doesn't work. Use JustUpdate, that uses os native solutions to perform the update.",
     long_description=readme,
