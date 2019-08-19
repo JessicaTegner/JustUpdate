@@ -47,6 +47,9 @@ class JustUpdateClient():
 		self._update_version = None
 		self._metadata = None
 		self._is_downloaded = False
+		self.post_update = False
+		if os.path.exists(os.path.join(self._user_data_dir, ".postupdate")):
+			self.post_update = True
 	
 	def add_callback(self, callback):
 		if callable(callback) == False:
@@ -55,6 +58,12 @@ class JustUpdateClient():
 	
 	def is_downloaded(self):
 		return self._is_downloaded
+	
+	def post_update_cleanup(self):
+		if os.path.exists(os.path.join(self._user_data_dir, ".postupdate")) == False:
+			return
+		os.remove(os.path.join(self._user_data_dir, ".postupdate"))
+		self.post_update = False
 	
 	def update_available(self):
 		if self.channel not in ("stable", "beta", "alpha"):
@@ -114,6 +123,8 @@ class JustUpdateClient():
 			self._download_update(new_version)
 	
 	def execute_update(self):
+		f = open(os.path.join(self._user_data_dir, ".postupdate"), "w")
+		f.close()
 		executor = CommandExecutor()
 		return executor.execute((self._user_data_dir, self.app_name, self._update_version.to_string()), CommandType.EXECUTE_UPDATE_FILE)
 	
