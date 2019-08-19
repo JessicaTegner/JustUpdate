@@ -47,9 +47,9 @@ class JustUpdateClient():
 		self._update_version = None
 		self._metadata = None
 		self._is_downloaded = False
-		self.post_update = False
+		self._is_post_update = False
 		if os.path.exists(os.path.join(self._user_data_dir, ".postupdate")):
-			self.post_update = True
+			self._is_post_update = True
 	
 	def add_callback(self, callback):
 		if callable(callback) == False:
@@ -59,11 +59,13 @@ class JustUpdateClient():
 	def is_downloaded(self):
 		return self._is_downloaded
 	
+	def is_post_update(self):
+		return self._is_post_update
+	
 	def post_update_cleanup(self):
 		if os.path.exists(os.path.join(self._user_data_dir, ".postupdate")) == False:
 			return
 		os.remove(os.path.join(self._user_data_dir, ".postupdate"))
-		self.post_update = False
 	
 	def update_available(self):
 		if self.channel not in ("stable", "beta", "alpha"):

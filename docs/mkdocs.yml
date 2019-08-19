@@ -1,1 +1,7 @@
 site_name: JustUpdate Documentation
+site_description: Documentation for the JustUpdate python module, cli and relating tools.
+site_author: NicklasMCHD
+copyright: © NicklasMCHD
+repo_url: https://github.com/NicklasMCHD/JustUpdate/
+markdown_extensions:
+  - nl2br

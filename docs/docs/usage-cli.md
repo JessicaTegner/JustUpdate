@@ -7,7 +7,9 @@ The CLI is what's will be helping you producing, commiting and uploading your up
 First up, initialize a JustUpdate repository.
 
 ~~~
+
 	justupdate init
+
 ~~~
 
 go through the onscreen prompts to finish the initialization.
@@ -18,7 +20,9 @@ Note: You'll need to do this on each platform you want to producea builds for.
 If you haven't already, you'll need to generate a JustUpdate spec file.
 
 ~~~
+
 justupdate make-spec pyinstaller_arguments scriptfile
+
 ~~~
 
 * replace "pyinstaller_arguments" with actual PyInstaller arguments.
@@ -30,7 +34,9 @@ Note: You'll need to do this on each platform, you want to produce a build for.
 After generating a spec file, run the folowing command to produce a build.
 
 ~~~
+
 justupdate build spec-file
+
 ~~~
 
 ## Commiting a new version
@@ -39,7 +45,9 @@ Note: You'll need to do this on each platform, after generating a build for that
 When you have asured that your build works as expected, you can commit it to the history in the JustUpdate repository like so.
 
 ~~~
+
 justupdate commit version
+
 ~~~
 
 #### Valid versions
@@ -61,13 +69,17 @@ This only needs to be done once and can be done the following way.
 To get a list of available uploader services, run the following command.
 
 ~~~
+
 justupdate upload
+
 ~~~
 
 After finding a service to your liking, run the following command with the service name from the above list, to initate the update.
 
 ~~~
+
 justupdate upload -s service
+
 ~~~
 
 If it's the first time uploading with this service in the JustUpdate repository, the initialization for that service will start.
