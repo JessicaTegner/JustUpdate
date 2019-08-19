@@ -23,3 +23,10 @@ def test_client_initalization_with_callback():
 	
 	client = JustUpdateClient(DummyClientConfig(), version, channel, dummy_callback)
 	assert len(client.callbacks) == 1
+
+def test_post_update():
+	client = JustUpdateClient(DummyClientConfig(), version, channel)
+	assert client.is_post_update() == False
+	client._is_post_update = True # for testing only
+	assert client.is_post_update()
+
