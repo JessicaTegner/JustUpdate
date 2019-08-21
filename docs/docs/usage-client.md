@@ -62,6 +62,7 @@ else:
 ## Downloading the update.
 
 After checking for updates, if an update is available, you can download it one of too ways, Asynchronous or Synchronous.
+The **background** flag in the download_update function, is used to tell, if you wan't to download Asynchronous or Synchronous.
 
 #### Downloading the update Synchronously
 

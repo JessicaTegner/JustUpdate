@@ -1,7 +1,6 @@
 ## Utilities
 Below are documentation on varius utilities found in JustUpdate.
 
-
 ## justupdate.repo.version.Version
 The version class, can be used to validate version strings, get a human representation, compare too versions against each other and more.
 

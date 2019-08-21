@@ -5,3 +5,4 @@ copyright: © NicklasMCHD
 repo_url: https://github.com/NicklasMCHD/JustUpdate/
 markdown_extensions:
   - nl2br
+  - sane_lists

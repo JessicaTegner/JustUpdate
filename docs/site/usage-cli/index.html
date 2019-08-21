@@ -109,7 +109,7 @@ The CLI is what's will be helping you producing, commiting and uploading your up
 
 <p>go through the onscreen prompts to finish the initialization.</p>
 <h2 id="creating-a-spec-file">Creating a spec file.</h2>
-<p>Note: You'll need to do this on each platform you want to producea builds for.</p>
+<p>Note: You'll need to do this on each platform you want to produce builds for.</p>
 <p>If you haven't already, you'll need to generate a JustUpdate spec file.</p>
 <pre><code>
 justupdate make-spec pyinstaller_arguments scriptfile
@@ -137,9 +137,11 @@ justupdate commit version
 </code></pre>
 
 <h4 id="valid-versions">Valid versions</h4>
-<p>Versions are deemed valid if the following criteria are met.
-* At least 3 numbers separated by dots.
-* (optional) the letter indicating if it's an alpha (a) or beta (b) followed by a number indicating which alpha/beta number it is.</p>
+<p>Versions are deemed valid if the following criteria are met.</p>
+<ul>
+<li>At least 3 numbers separated by dots.</li>
+<li>(optional) the letter indicating if it's an alpha (a) or beta (b) followed by a number indicating which alpha/beta number it is.</li>
+</ul>
 <p>Below are some examples for some valid version numbers.</p>
 <ul>
 <li>1.2.3 (a stable version)</li>
@@ -163,7 +165,7 @@ justupdate upload -s service
 
 <p>If it's the first time uploading with this service in the JustUpdate repository, the initialization for that service will start.<br />
 The scp, as an example, will begin to ask you for connection information and remote path to store the JustUpdate files.<br />
-The uploader service initialization is a one time process and will be remembered for later use (only in that JustUpdar repository).<br />
+The uploader service initialization is a one time process and will be remembered for later use (only in that JustUpdate repository).<br />
 Note: The credentials for each initialized uploader service will be saved to <strong>"ju-repo/credentials.dat"</strong></p></div>
         </div>
 

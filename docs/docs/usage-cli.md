@@ -15,7 +15,7 @@ First up, initialize a JustUpdate repository.
 go through the onscreen prompts to finish the initialization.
 
 ## Creating a spec file.
-Note: You'll need to do this on each platform you want to producea builds for.
+Note: You'll need to do this on each platform you want to produce builds for.
 
 If you haven't already, you'll need to generate a JustUpdate spec file.
 
@@ -52,6 +52,7 @@ justupdate commit version
 
 #### Valid versions
 Versions are deemed valid if the following criteria are met.
+
 * At least 3 numbers separated by dots.
 * (optional) the letter indicating if it's an alpha (a) or beta (b) followed by a number indicating which alpha/beta number it is.
 
@@ -84,7 +85,7 @@ justupdate upload -s service
 
 If it's the first time uploading with this service in the JustUpdate repository, the initialization for that service will start.
 The scp, as an example, will begin to ask you for connection information and remote path to store the JustUpdate files.
-The uploader service initialization is a one time process and will be remembered for later use (only in that JustUpdar repository).
+The uploader service initialization is a one time process and will be remembered for later use (only in that JustUpdate repository).
 Note: The credentials for each initialized uploader service will be saved to **"ju-repo/credentials.dat"**
 
 
