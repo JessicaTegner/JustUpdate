@@ -18,7 +18,8 @@ or by cloning the repository
 * python setup.py install
 
 ### Usage
-* todo
+Read the full documentation at https://NicklasMCHD.github.io/JustUpdate/
+
 
 ### License
                    GNU LESSER GENERAL PUBLIC LICENSE
