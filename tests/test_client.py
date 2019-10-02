@@ -30,3 +30,7 @@ def test_post_update():
 	client._is_post_update = True # for testing only
 	assert client.is_post_update()
 
+def test_cleanup():
+	client = JustUpdateClient(DummyClientConfig(), version, channel)
+	assert client.cleanup() == True
+

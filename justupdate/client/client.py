@@ -1,3 +1,4 @@
+import shutil
 import os
 import json
 import threading
@@ -67,6 +68,16 @@ class JustUpdateClient():
 			return
 		os.remove(os.path.join(self._user_data_dir, ".postupdate"))
 	
+	def cleanup(self):
+		try:
+			shutil.rmtree(self._user_data_dir)
+			return True
+		except FileNotFoundError:
+			return True
+		except:
+			raise
+			return False
+		
 	def update_available(self):
 		if self.channel not in ("stable", "beta", "alpha"):
 			raise InvalidUpdateChannelException(f"\"{channel} is an invalid update channel. Available channels are alpha, beta and stable.")
