@@ -72,7 +72,7 @@ class JustUpdateClient():
 		try:
 			shutil.rmtree(self._user_data_dir)
 			return True
-		except IOError:
+		except OSError:
 			return True
 		except:
 			raise
