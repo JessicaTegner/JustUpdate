@@ -13,7 +13,7 @@ def _real_main(args):
 		setup_logging_debug()
 	else:
 		setup_logging()
-	logging.info(f"JustUpdate - {__version__}.")
+	logging.info("JustUpdate - {}.".format(__version__))
 	if args.debug:
 		logging.info("Debug mode on.")
 	result = dispatch_command(args, extra)

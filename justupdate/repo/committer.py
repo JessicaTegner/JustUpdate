@@ -25,19 +25,19 @@ class Committer():
 			os.makedirs(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy"))
 	
 	def insure_build_availability(self):
-		cmd = getattr(self, f"_insure_build_availability_{get_platform_name_short()}")
+		cmd = getattr(self, "_insure_build_availability_{}".format(get_platform_name_short()))
 		return cmd()
 	
 	def produce_executable(self):
-		cmd = getattr(self, f"_produce_executable_{get_platform_name_short()}")
+		cmd = getattr(self, "_produce_executable_{}".format(get_platform_name_short()))
 		return cmd()
 	
 	def create_metadata(self):
-		cmd = getattr(self, f"_create_metadata_{get_platform_name_short()}")
+		cmd = getattr(self, "_create_metadata_{}".format(get_platform_name_short()))
 		return cmd()
 	
 	def finalize(self):
-		cmd = getattr(self, f"_finalize_{get_platform_name_short()}")
+		cmd = getattr(self, "_finalize_{}".format(get_platform_name_short()))
 		return cmd()
 	
 	def _insure_build_availability_win(self):

@@ -24,13 +24,13 @@ class MetaData():
 	def add_metadata(self, filename, checksum, version):
 		""" filename is the name of the executable created with commit, checksum is the sha512 checksum and version is the version number"""
 		md = {"filename": filename, "checksum": checksum, "version":version}
-		logging.debug(f"Metadata: {md}.")
+		logging.debug("Metadata: {}.".format(md))
 		self._metadata[version] = md
 		return self
 	
 	def get_metadata_for_version(self, version):
 		if version not in self._metadata:
-			raise UnknownMetaDataError(f"Metadata for version {version} on platform {get_platform_name_short()} does not exist.")
+			raise UnknownMetaDataError("Metadata for version {} on platform {} does not exist.".format(version, get_platform_name_short()))
 		return self._metadata[version]
 	
 	def get_newest(self, channel):
@@ -78,17 +78,17 @@ class MetaData():
 		return v1
 	
 	def load(self):
-		if os.path.isfile(os.path.join(JustUpdateConstants.REPO_FOLDER, "archive", f"metadata-{get_platform_name_short()}.ju")) == False and os.path.isfile(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", f"metadata-{get_platform_name_short()}.ju")) == False:
-			logging.debug(f"No metadata for platform {get_platform_name_short()} found.")
+		if os.path.isfile(os.path.join(JustUpdateConstants.REPO_FOLDER, "archive", "metadata-{}.ju".format(get_platform_name_short()))) == False and os.path.isfile(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", "metadata-{}.ju".format(get_platform_name_short()))) == False:
+			logging.debug("No metadata for platform {} found.".format(get_platform_name_short()))
 			return {}
 		
 		# ok the metadata file most exist. Try to load it.
 		# first see if there's one in deploy, if not, go for the one in archive.
 		data = b""
 		try:
-			data = data_manager.open_file(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", f"metadata-{get_platform_name_short()}.ju"), "rb")
+			data = data_manager.open_file(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", "metadata-{}.ju".format(get_platform_name_short())), "rb")
 		except FileNotFoundError:
-			data = data_manager.open_file(os.path.join(JustUpdateConstants.REPO_FOLDER, "archive", f"metadata-{get_platform_name_short()}.ju"), "rb")
+			data = data_manager.open_file(os.path.join(JustUpdateConstants.REPO_FOLDER, "archive", "metadata-{}.ju".format(get_platform_name_short())), "rb")
 		data = data_manager.decompress(data)
 		data = json.loads(data)
 		return data
@@ -98,7 +98,7 @@ class MetaData():
 			os.makedirs(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy"))
 		data = json.dumps(self._metadata)
 		data = data_manager.compress(data)
-		f = open(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", f"metadata-{get_platform_name_short()}.ju"), "wb")
+		f = open(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", "metadata-{}.ju".format(get_platform_name_short())), "wb")
 		f.write(data)
 		f.close()
 		return self

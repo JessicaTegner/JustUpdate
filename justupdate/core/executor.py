@@ -22,7 +22,7 @@ class CommandExecutor():
 			except FileNotFoundError:
 				return False
 		if type == CommandType.EXECUTE_UPDATE_FILE:
-			cmd = getattr(self, f"_execute_update_{get_platform_name_short()}")
+			cmd = getattr(self, "_execute_update_{}".format(get_platform_name_short()))
 			return cmd(*arg)
 
 	def _run_platform_agnostic_command(self, cmd, stdin):

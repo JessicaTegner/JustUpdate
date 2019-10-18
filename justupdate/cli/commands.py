@@ -13,7 +13,7 @@ from justupdate.repo.committer import Committer
 from justupdate.repo.uploader import UploadManager
 
 def _cmd_version(args, extra=None):
-	logging.info(f"JustUpdate version {__version__}.")
+	logging.info("JustUpdate version {}.".format(__version__))
 
 def _cmd_init(args, extra=None):
 	if os.path.isfile(os.path.join(JustUpdateConstants.REPO_FOLDER, "config.ju")) or os.path.isdir(JustUpdateConstants.REPO_FOLDER):
@@ -81,7 +81,7 @@ def _cmd_commit(args, extra=None):
 		logging.error("No build for this platform found. please run \"justupdate build\".")
 		return True
 	committer.setup()
-	logging.info(f"Starting commit process for build version {args.app_version} / {committer.version.to_human_readable()}.")
+	logging.info("Starting commit process for build version {} / {}.".format(args.app_version, committer.version.to_human_readable()))
 	logging.info("Producing executable")
 	if committer.produce_executable() == False:
 		# Something went wrong during the executable creation.
@@ -90,7 +90,7 @@ def _cmd_commit(args, extra=None):
 		# something went wrong with metadata creation.
 		return True
 	committer.finalize()
-	logging.info(f"Committed version {committer.version.to_string()}.")
+	logging.info("Committed version {}.".format(committer.version.to_string()))
 	return True
 
 def _cmd_upload(args, extra=None):
@@ -107,7 +107,7 @@ def _cmd_upload(args, extra=None):
 		return True
 	if os.path.isdir(os.path.join(JustUpdateConstants.REPO_FOLDER, "archive")) == False:
 		os.makedirs(os.path.join(JustUpdateConstants.REPO_FOLDER, "archive"))
-	logging.info(f"Starting upload with {args.service} uploader service.")
+	logging.info("Starting upload with {} uploader service.".format(args.service))
 	service = service(upload_manager)
 	service.connect()
 	for file in os.listdir(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy")):

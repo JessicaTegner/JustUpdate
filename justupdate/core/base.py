@@ -22,18 +22,18 @@ def get_platform_name_short():
 
 def prompt(question, default="", allow_empty=False):
 	while True:
-		logging.info(question + " {}".format(f"Default {default}:" if default != "" else "No default available:"))
+		logging.info(question + " {}".format("Default {}:".format(default) if default != "" else "No default available:"))
 		result = input(">> ") or default
 		if result == "" and allow_empty==False:
 			logging.warning("This value cannot be left blank.")
 			continue
-		correction = input(f"You entered {result}, is that correct? n/y") or "n"
+		correction = input("You entered {}, is that correct? n/y".format(result)) or "n"
 		if correction == "y":
 			return result
 
 def confirmation(question, default):
 	while True:
-		logging.info(question + f" y / n, default {default}:")
+		logging.info(question + " y / n, default {}:".format(default))
 		result = input(">> ") or default
 		if result == "":
 			logging.warning("Please either enter \"y\" or \"n\".")
@@ -43,4 +43,4 @@ def confirmation(question, default):
 		if result == "n":
 			return False
 		else:
-			logging.warning(f"Invalid value \"result\". Please either enter \"y\" or \"n\".")
+			logging.warning("Invalid value \"{}\". Please either enter \"y\" or \"n\".".format(result))

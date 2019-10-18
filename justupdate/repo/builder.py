@@ -17,7 +17,7 @@ class Builder():
 			shutil.rmtree(os.path.join(JustUpdateConstants.REPO_FOLDER, "work"))
 		except FileNotFoundError:
 			pass # It's ok if the folder doesn't exist.
-		cmd = getattr(self, f"_clean_{get_platform_name_short()}")
+		cmd = getattr(self, "_clean_{}".format(get_platform_name_short()))
 		return cmd()
 	
 	def _clean_win(self):
@@ -53,7 +53,7 @@ class Builder():
 		return result == 0
 	
 	def post_build(self):
-		cmd = getattr(self, f"_post_build_{get_platform_name_short()}")
+		cmd = getattr(self, "_post_build_{}".format(get_platform_name_short()))
 		return cmd()
 	
 	def _post_build_win(self):
@@ -63,12 +63,12 @@ class Builder():
 		app_name = self.config.get("app_name")
 		# First look for .exe.manifest, and rename that if it exists.
 		try:
-			os.rename(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", "win.exe.manifest"), os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", f"{app_name}.exe.manifest"))
+			os.rename(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", "win.exe.manifest"), os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", "{}.exe.manifest".format(app_name)))
 		except:
 			pass
 		# then try for the exe itself.
 		try:
-			os.rename(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", "win.exe"), os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", f"{app_name}.exe"))
+			os.rename(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", "win.exe"), os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", "{}.exe".format(app_name)))
 		except:
 			raise
 		logging.info("Done")

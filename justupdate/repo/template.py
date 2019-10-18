@@ -9,7 +9,7 @@ from justupdate.core.executor import CommandExecutor, CommandType
 def prepare_template(version):
 	config = Config()
 	config.load(os.path.join(JustUpdateConstants.REPO_FOLDER, "config.ju"))
-	cmd = getattr(sys.modules[__name__], f"_prepare_template_{get_platform_name_short()}")
+	cmd = getattr(sys.modules[__name__], "_prepare_template_{}".format(get_platform_name_short()))
 	return cmd(version, config)
 
 def _prepare_template_win(version, config):

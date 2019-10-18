@@ -80,7 +80,7 @@ class JustUpdateClient():
 		
 	def update_available(self):
 		if self.channel not in ("stable", "beta", "alpha"):
-			raise InvalidUpdateChannelException(f"\"{channel} is an invalid update channel. Available channels are alpha, beta and stable.")
+			raise InvalidUpdateChannelException("\"{} is an invalid update channel. Available channels are alpha, beta and stable.".format(channel))
 		current_version = Version(self.current_version)
 		try:
 			self._metadata = self._load_metadata()
@@ -144,7 +144,7 @@ class JustUpdateClient():
 	def _load_metadata(self):
 		md = ""
 		try:
-			md = self._download_file(f"metadata-{get_platform_name_short()}.ju")
+			md = self._download_file("metadata-{}.ju".format(get_platform_name_short()))
 		except requests.ConnectTimeout:
 			return None
 		except:

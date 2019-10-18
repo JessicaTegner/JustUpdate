@@ -17,7 +17,7 @@ class UploadManager():
 	
 	def register_upload_service(self, name, service):
 		if issubclass(service, UploaderBase) == False:
-			raise ValueError(f"\"{service}\" most inherit from \"UploaderBase\".")
+			raise ValueError("\"{}\" most inherit from \"UploaderBase\".".format(service))
 		self.upload_services[name] = service
 	
 	def get_upload_service(self, name):
