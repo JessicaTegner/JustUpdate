@@ -1,4 +1,7 @@
 # Just. Update
+
+[![Build Status](https://travis-ci.com/NicklasMCHD/JustUpdate.svg?branch=master)](https://travis-ci.com/NicklasMCHD/JustUpdate)
+
 Just. Update, is a updater system, written in python, that utilizes each platforms native method of installing an application, to perform an update.
 * On windows, JustUpdate uses NSIS (nullsoft scriptable install system) to perform the update.
 * On Mac, JustUpdate uses the pkg flat installer archive format, to perform the update (productbuild).
