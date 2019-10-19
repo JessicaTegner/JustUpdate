@@ -54,7 +54,7 @@ def _prepare_template_mac(version, config):
 	#os.chmod(os.path.join(JustUpdateConstants.REPO_FOLDER, "templates", "mac", "scripts", "postinstall.sh"), st.st_mode | 0o111)
 	executor = CommandExecutor()
 	cmd = ["chmod", "x+", os.path.join(JustUpdateConstants.REPO_FOLDER, "templates", "mac", "scripts", "postinstall.sh")]
-	result, stdout = executor.execute(cmd, CommandType.Raw)
+	result, stdout = executor.execute(cmd, CommandType.RAW)
 	if result > 0:
 		print(stdout)
 		sys.exit()
