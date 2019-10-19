@@ -49,14 +49,3 @@ def _prepare_template_mac(version, config):
 	postinstall = open(os.path.join(JustUpdateConstants.REPO_FOLDER, "templates", "mac", "scripts", "postinstall.sh"), "w", encoding="utf-8")
 	postinstall.write(data)
 	postinstall.close()
-	# make sure postinstall script are executable.
-	#st = os.stat(os.path.join(JustUpdateConstants.REPO_FOLDER, "templates", "mac", "scripts", "postinstall.sh"))
-	#os.chmod(os.path.join(JustUpdateConstants.REPO_FOLDER, "templates", "mac", "scripts", "postinstall.sh"), st.st_mode | 0o111)
-	executor = CommandExecutor()
-	cmd = ["chmod", "x+", os.path.join(JustUpdateConstants.REPO_FOLDER, "templates", "mac", "scripts", "postinstall.sh")]
-	result, stdout = executor.execute(cmd, CommandType.RAW)
-	if result > 0:
-		print(stdout)
-		sys.exit()
-
-
