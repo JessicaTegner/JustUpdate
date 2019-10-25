@@ -1,11 +1,4 @@
 language: python
-# ===== Linux ======
-dist: xenial
-python:
-  - 2.7
-  - 3.5
-  - 3.6
-  - 3.7
 matrix:
   include:
     - name: "Python 2.7.14 on macOS 10.13"
