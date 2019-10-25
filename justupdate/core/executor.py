@@ -35,5 +35,5 @@ class CommandExecutor():
 
 	def _execute_update_mac(self, folder, app_name, version):
 		path = os.path.join(folder, app_name+"-"+version+".pkg")
-		return subprocess.Popen("osascript -e 'do shell script \"installer -pkg \\\"{0}\\\" -target /\" with prompt \"{1} WANTS TO make changes\" with administrator privileges'".format(path, app_name), shell=True)
+		return subprocess.call("osascript -e 'do shell script \"installer -pkg \\\"{0}\\\" -target /\" with prompt \"{1} WANTS TO make changes\" with administrator privileges'".format(path, app_name), shell=True) == 0
 
