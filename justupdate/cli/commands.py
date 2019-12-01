@@ -112,7 +112,7 @@ def _cmd_upload(args, extra=None):
 	service.connect()
 	files_to_upload = []
 	deploy_folder = os.listdir(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy"))
-	logging.info("Checking out files for upload.)
+	logging.info("Checking out files for upload.")
 	# run the loop 2 times, one for exe's and pkg's and the other for .ju files.
 	for file in deploy_folder:
 		if os.path.isfile(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", file)) == False:
@@ -126,7 +126,7 @@ def _cmd_upload(args, extra=None):
 		full_file = os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", file)
 		if full_file.endswith(".ju"):
 			files_to_upload.append(full_file)
-	logging.info("Files to upload: {}".format(files_to_upload))
+	logging.info("Files to upload: {}.".format(files_to_upload))
 	for _file in files_to_upload:
 		logging.debug("Starting upload of {}.".format(_file))
 		service.upload_file(_file)
