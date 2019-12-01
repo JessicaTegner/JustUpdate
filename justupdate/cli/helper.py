@@ -9,9 +9,11 @@ def setup_logging_debug():
 	logging_config = dict(
 	version = 1,
 	formatters = {
-		'f': {'format':
-			  f'{current_time} %(name)s %(levelname)-2s %(message)s'}
-		},
+		'f': {
+			'format': '%(asctime)s %(name)s %(levelname)-2s %(message)s',
+			'datefmt': '%Y-%m-%d %H:%M'
+		}
+	},
 	handlers = {
 		'h': {'class': 'logging.StreamHandler',
 			  'formatter': 'f',
@@ -30,9 +32,11 @@ def setup_logging():
 	logging_config = dict(
 	version = 1,
 	formatters = {
-		'f': {'format':
-			  f'{current_time} %(name)s %(levelname)-2s %(message)s'}
-		},
+		'f': {
+			'format': '%(asctime)s %(name)s %(levelname)-2s %(message)s',
+			'datefmt': '%Y-%m-%d %H:%M'
+		}
+	},
 	handlers = {
 		'h': {'class': 'logging.StreamHandler',
 			  'formatter': 'f',
