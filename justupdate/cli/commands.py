@@ -110,13 +110,30 @@ def _cmd_upload(args, extra=None):
 	logging.info("Starting upload with {} uploader service.".format(args.service))
 	service = service(upload_manager)
 	service.connect()
-	for file in os.listdir(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy")):
+	files_to_upload = []
+	deploy_folder = os.listdir(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy"))
+	logging.info("Checking out files for upload.)
+	# run the loop 2 times, one for exe's and pkg's and the other for .ju files.
+	for file in deploy_folder:
 		if os.path.isfile(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", file)) == False:
 			continue
-		service.upload_file(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", file))
+		full_file = os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", file)
+		if full_file.endswith(".exe") or full_file.endswith(".pkg"):
+			files_to_upload.append(full_file)
+	for file in deploy_folder:
+		if os.path.isfile(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", file)) == False:
+			continue
+		full_file = os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", file)
+		if full_file.endswith(".ju"):
+			files_to_upload.append(full_file)
+	logging.info("Files to upload: {}".format(files_to_upload))
+	for _file in files_to_upload:
+		logging.debug("Starting upload of {}.".format(_file))
+		service.upload_file(_file)
+		logging.debug("Upload of file {} completed.".format(_file))
 	service.disconnect()
 	logging.info("Upload done. Moving uploaded files to archive.")
-	for item in os.listdir(os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy")):
+	for item in deploy_folder:
 		s = os.path.join(JustUpdateConstants.REPO_FOLDER, "deploy", item)
 		d = os.path.join(JustUpdateConstants.REPO_FOLDER, "archive", item)
 		shutil.move(s, d)
