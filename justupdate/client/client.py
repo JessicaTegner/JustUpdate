@@ -157,7 +157,6 @@ class JustUpdateClient():
 			return None
 		except:
 			raise
-		md = data_manager.open_file(md, "rb")
 		md = data_manager.decompress(md)
 		md = json.loads(md)
 		metadata = MetaData()
@@ -173,7 +172,6 @@ class JustUpdateClient():
 		if os.path.isdir(self._user_data_dir) == False:
 			os.makedirs(self._user_data_dir)
 		url = urljoin(self.update_url, file)
-		local_filename = os.path.join(self._user_data_dir, url.split('/')[-1])
 		timeout = getattr(self._client_config, "cache_timeout", 1)
 		s = requests_cache.CachedSession(cache_name= os.path.join(self._user_data_dir, "cache"), expire_after=timeout, old_data_on_error=True)
 		response = None
@@ -182,13 +180,7 @@ class JustUpdateClient():
 				response = s.get(url)
 		else:
 			response = s.get(url)
-		print(response.content)
-		print(response.from_cache)
-		print(bypass_metadata_cache)
-		f = open(local_filename, 'wb')
-		f.write(response.content)
-		f.close()
-		return local_filename
+		return response.content
 	
 	def _download_file(self, file, checksum=None, do_callbacks=False):
 		if os.path.isdir(self._user_data_dir) == False:
