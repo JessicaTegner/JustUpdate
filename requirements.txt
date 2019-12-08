@@ -1,6 +1,7 @@
-versioneer
-appdirs
-scp
-paramiko
-requests
-pyinstaller==3.5
+-i https://pypi.org/simple
+appdirs==1.4.3
+paramiko==2.7.0
+requests-cache==0.5.2
+requests==2.22.0
+scp==0.13.2
+versioneer==0.18

@@ -8,6 +8,9 @@ class DummyClientConfig():
 	app_author = "DummyCompany"
 	update_url = "https://dummycompany.com/dummyapp"
 
+# not part of the class
+version = "1.0.0a1"
+channel = "alpha"
 
 def test_client_initalization():
 	client = JustUpdateClient(DummyClientConfig(), version, channel)
