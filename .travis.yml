@@ -7,8 +7,7 @@ matrix:
       language: shell       # 'language: python' is an error on Travis CI macOS
       before_install:
         - python --version
-        - pip install -U pip
-        - python -m pip install --upgrade pip
+        - pip install -U pip --user
         - pip install pytest --user
       install: pip install -r requirements.txt --user
       script: python -m pytest
