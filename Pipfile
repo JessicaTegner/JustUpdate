@@ -12,6 +12,7 @@ appdirs = "*"
 scp = "*"
 paramiko = "*"
 requests = "*"
+requests-cache = "*"
 
 [requires]
 python_version = "3.7"

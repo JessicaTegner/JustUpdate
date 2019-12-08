@@ -5,6 +5,7 @@ import threading
 import hashlib
 
 import requests
+import requests_cache
 try:
 	from urlparse import urljoin
 except:
@@ -30,12 +31,14 @@ class JustUpdateClient():
 		app_name (str) : The application name.
 		app_author (str) : The application author.
 		update_url (str) : The url where the metadata and updates are stored.
+		cache_timeout (int) : The time in seconds, before metadata will be downloaded from the server, if present in cache.
 		
 		In addition:
 		current_version (str) : The applications current version.
 		channel (str) : The channel which for look for updates on (either alpha, beta or stable).
 		callback (callable, optional) a function to call on downlaod progress.
 		"""
+		self._client_config = config
 		self.app_name = config.app_name
 		self.app_author = config.app_author
 		self.update_url = config.update_url
@@ -78,12 +81,17 @@ class JustUpdateClient():
 			raise
 			return False
 		
-	def update_available(self):
+	def update_available(self, bypass_metadata_cache=False):
+		"""Checks for updates to the application
+		
+		args:
+			bypass_metadata_cache (bool) : Bypass the available cache for the metadata, True to force redownload of metadata, False to use cache. (Default False).
+		"""
 		if self.channel not in ("stable", "beta", "alpha"):
 			raise InvalidUpdateChannelException("\"{} is an invalid update channel. Available channels are alpha, beta and stable.".format(channel))
 		current_version = Version(self.current_version)
 		try:
-			self._metadata = self._load_metadata()
+			self._metadata = self._load_metadata(bypass_metadata_cache)
 		except requests.exceptions.HTTPError as e:
 			raise e
 			return False
@@ -141,10 +149,10 @@ class JustUpdateClient():
 		executor = CommandExecutor()
 		return executor.execute((self._user_data_dir, self.app_name, self._update_version.to_string()), CommandType.EXECUTE_UPDATE_FILE)
 	
-	def _load_metadata(self):
+	def _load_metadata(self, bypass_metadata_cache_cache):
 		md = ""
 		try:
-			md = self._download_file("metadata-{}.ju".format(get_platform_name_short()))
+			md = self._download_metadata("metadata-{}.ju".format(get_platform_name_short()), bypass_metadata_cache_cache)
 		except requests.ConnectTimeout:
 			return None
 		except:
@@ -160,6 +168,27 @@ class JustUpdateClient():
 		metadata = self._metadata.get_metadata_for_version(new_version)
 		self._download_file(metadata["filename"], metadata["checksum"], True)
 		self._is_downloaded = True
+	
+	def _download_metadata(self, file, bypass_metadata_cache=False):
+		if os.path.isdir(self._user_data_dir) == False:
+			os.makedirs(self._user_data_dir)
+		url = urljoin(self.update_url, file)
+		local_filename = os.path.join(self._user_data_dir, url.split('/')[-1])
+		timeout = getattr(self._client_config, "cache_timeout", 1)
+		s = requests_cache.CachedSession(cache_name= os.path.join(self._user_data_dir, "cache"), expire_after=timeout, old_data_on_error=True)
+		response = None
+		if bypass_metadata_cache:
+			with s.cache_disabled():
+				response = s.get(url)
+		else:
+			response = s.get(url)
+		print(response.content)
+		print(response.from_cache)
+		print(bypass_metadata_cache)
+		f = open(local_filename, 'wb')
+		f.write(response.content)
+		f.close()
+		return local_filename
 	
 	def _download_file(self, file, checksum=None, do_callbacks=False):
 		if os.path.isdir(self._user_data_dir) == False:
