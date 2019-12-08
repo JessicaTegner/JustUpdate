@@ -1,4 +1,3 @@
--i https://pypi.org/simple
 appdirs==1.4.3
 paramiko==2.7.0
 requests-cache==0.5.2
