@@ -96,7 +96,9 @@ def _cmd_commit(args, extra=None):
 def _cmd_upload(args, extra=None):
 	upload_manager = UploadManager()
 	if args.service is None: # no service specified. Show list of available services.
-		logging.info("Available services: {}.".format(", ".join(upload_manager.get_available_upload_services())))
+		logging.info("Available services:")
+		for uploader_service_name in upload_manager.get_available_upload_services():
+			logging.info("{0} ({1})".format(uploader_service_name, upload_manager.get_service_description(uploader_service_name)))
 		return True
 	service = upload_manager.get_upload_service(args.service)
 	if service is None: # invalid service

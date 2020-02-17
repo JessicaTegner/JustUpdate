@@ -67,7 +67,7 @@ Below are some examples for some valid version numbers.
 After generating builds and commiting them for the wanted platforms, it's time to upload them.
 This only needs to be done once and can be done the following way.
 
-To get a list of available uploader services, run the following command.
+To get information about the available uploader services, run the following command.
 
 ~~~
 

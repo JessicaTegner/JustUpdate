@@ -13,6 +13,7 @@ class UploadManager():
 	def __init__(self):
 		self.upload_services = {}
 		# register build in services.
+		self.register_upload_service("gh-archive", GitHubArchiver)
 		self.register_upload_service("scp", SCPUploader)
 	
 	def register_upload_service(self, name, service):
@@ -27,6 +28,18 @@ class UploadManager():
 	
 	def get_available_upload_services(self):
 		return self.upload_services.keys()
+	
+	def get_service_description(self, name):
+		if name not in self.upload_services.keys():
+			raise ValueError("Invalid uploader service.")
+			return
+		service = self.upload_services[name]
+		description = ""
+		try:
+			description = service.description
+		except AttributeError:
+			description = "No description available."
+		return description
 	
 	def load_settings(self, name):
 		if os.path.isfile(os.path.join(JustUpdateConstants.REPO_FOLDER, "credentials.ju")) == False:
@@ -62,7 +75,13 @@ class UploaderBase():
 	def disconnect(self):
 		pass
 
+class GitHubArchiver(UploaderBase):
+	description = "Archive the produced builds (without uploading them to a third party server). Useful if using GitHub as the updater url."
+	def __init__(self, manager):
+		pass
+
 class SCPUploader(UploaderBase):
+	description = "Upload the produced builds to a third party server using the ssh protocol."
 	def __init__(self, manager):
 		self.manager = manager
 		self.client = paramiko.SSHClient()
