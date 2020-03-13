@@ -56,8 +56,16 @@ class Version():
 		return self._converted_raw_version() != other._converted_raw_version()
 	
 	def __gt__(self, other):
+		if self.is_stable ==True and other.is_stable == False:
+			return True
+		if self.is_beta ==True and other.is_alpha == True:
+			return True
 		return self._converted_raw_version() > other._converted_raw_version()
 	
 	def __lt__(self, other):
+		if self.is_alpha == True and other.is_alpha == False:
+			return True
+		if self.is_beta == True and other.is_stable == True:
+			return True
 		return self._converted_raw_version() < other._converted_raw_version()
 

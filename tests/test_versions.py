@@ -28,6 +28,10 @@ def test_version_greater_than():
 	assert Version("1.0.1a1") > Version("1.0.0a1")
 	assert Version("1.1.0a1") > Version("1.0.0a1")
 	assert Version("2.0.0a1") > Version("1.0.0a1")
+	# Mixed channel versions (version priority)
+	assert Version("1.0.0") > Version("1.0.0b1")
+	assert Version("1.0.0b1") > Version("1.0.0a1")
+	assert Version("1.0.0") > Version("1.0.0a1")
 
 
 def test_less_than():
@@ -45,6 +49,10 @@ def test_less_than():
 	assert Version("1.0.0a1") < Version("1.0.1a1")
 	assert Version("1.0.0a1") < Version("1.1.0a1")
 	assert Version("1.0.0a1") < Version("2.0.0a1")
+	# Mixed channel versions (version priority)
+	assert Version("1.0.0a1") < Version("1.0.0b1")
+	assert Version("1.0.0b1") < Version("1.0.0")
+	assert Version("1.0.0a1") < Version("1.0.0")
 
 def test_internal_representation():
 	v1 = Version("1.2.3")
