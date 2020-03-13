@@ -14,14 +14,37 @@ def test_version_inequality():
 	assert Version("1.0.0a1") != Version("1.0.0")
 
 def test_version_greater_than():
+	# stable ones
 	assert Version("1.0.2") > Version("1.0.1")
 	assert Version("1.2.0") > Version("1.1.0")
 	assert Version("2.0.0") > Version("1.0.0")
+	# beta versions
+	assert Version("1.0.0b2") > Version("1.0.0b1")
+	assert Version("1.0.1b1") > Version("1.0.0b1")
+	assert Version("1.1.0b1") > Version("1.0.0b1")
+	assert Version("2.0.0b1") > Version("1.0.0b1")
+	# alpha versions
+	assert Version("1.0.0a2") > Version("1.0.0a1")
+	assert Version("1.0.1a1") > Version("1.0.0a1")
+	assert Version("1.1.0a1") > Version("1.0.0a1")
+	assert Version("2.0.0a1") > Version("1.0.0a1")
+
 
 def test_less_than():
+	# stable ones
 	assert Version("1.0.1") < Version("1.0.2")
 	assert Version("1.1.0") < Version("1.2.0")
 	assert Version("1.0.0") < Version("2.0.0")
+	# beta versions
+	assert Version("1.0.0b1") < Version("1.0.0b2")
+	assert Version("1.0.0b1") < Version("1.0.1b1")
+	assert Version("1.0.0b1") < Version("1.1.0b1")
+	assert Version("1.0.0b1") < Version("2.0.0b1")
+	# alpha versions
+	assert Version("1.0.0a1") < Version("1.0.0a2")
+	assert Version("1.0.0a1") < Version("1.0.1a1")
+	assert Version("1.0.0a1") < Version("1.1.0a1")
+	assert Version("1.0.0a1") < Version("2.0.0a1")
 
 def test_internal_representation():
 	v1 = Version("1.2.3")
