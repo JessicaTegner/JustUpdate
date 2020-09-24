@@ -1,6 +1,7 @@
-appdirs==1.4.3
-paramiko==2.7.0
-requests-cache==0.5.2
-requests==2.22.0
-scp==0.13.2
-versioneer==0.18
+appdirs
+paramiko
+requests-cache
+requests
+scp
+versioneer
+pyinstaller
