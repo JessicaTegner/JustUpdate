@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "justupdate"
+version = "1.3.7"
+description = ""
+authors = ["NicklasTegner <NicklasMCHD@live.dk>"]
+license = "mit"
+keywords = ["PyUpdater", "Pyinstaller", "Auto", "Update", "AutoUpdate", "Auto-Update", "Esky", "simple", "updater", "mac/updater", "windows/updater", "updater4pyi", "bbfreeze", "ccfreeze", "freeze", "cz_freeze", "pyupdate"]
+classifiers = ["Development Status :: 4 - Beta", "Environment :: Console", "Intended Audience :: Developers", "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)", "Topic :: Software Development :: Build Tools", "Operating System :: OS Independent", "Programming Language :: Python :: 2.7", "Programming Language :: Python :: 3.4", "Programming Language :: Python :: 3.5", "Programming Language :: Python :: 3.6", "Programming Language :: Python :: 3.7"]
+homepage = "https://github.com/NicklasTegner/JustUpdate"
+repository = "https://github.com/NicklasTegner/JustUpdate"
+readme = "README.md"
+packages = [
+    { include = "justupdate" },
+]
+include = ["readme.md", "docs/docs/*"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+appdirs = "^1.4.4"
+scp = "^0.13.3"
+paramiko = "^2.7.2"
+requests = "^2.25.0"
+requests-cache = "^0.5.2"
+pyinstaller = "^4.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1.2"
+pre-commit = "^2.8.2"
+
+[tool.poetry.scripts]
+justupdate = 'justupdate.cli:main'
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/NicklasTegner/JustUpdate/issues"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

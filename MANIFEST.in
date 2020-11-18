@@ -1,6 +1,0 @@
-include license
-include requirements.txt
-include README.md
-include versioneer.py
-include justupdate/_version.py
-recursive-include justupdate/templates *.*

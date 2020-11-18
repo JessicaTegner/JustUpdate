@@ -1,7 +1,0 @@
-appdirs
-paramiko
-requests-cache
-requests
-scp
-versioneer
-pyinstaller
