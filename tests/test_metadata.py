@@ -1,7 +1,7 @@
 """This tests the metadata format"""
-
 from . import util
-from justupdate.repo.metadata import MetaData, MetaDataChannel
+from justupdate.repo.metadata import MetaData
+from justupdate.repo.metadata import MetaDataChannel
 from justupdate.repo.version import Version
 
 def test_metadata_initialization():

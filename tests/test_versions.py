@@ -1,5 +1,4 @@
 """This tests the justupdate/repo/version.py file"""
-
 from . import util
 from justupdate.repo.version import Version
 
@@ -71,4 +70,3 @@ def test_human_readability():
 	assert v1.to_human_readable() == "1.2.3"
 	assert v2.to_human_readable() == "1.2.3 beta 4"
 	assert v3.to_human_readable() == "1.2.3 alpha 4"
-

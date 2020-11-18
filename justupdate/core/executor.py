@@ -1,6 +1,7 @@
-import os
 import logging
+import os
 import subprocess
+
 from justupdate.core.base import get_platform_name_short
 
 class CommandType():
@@ -22,7 +23,7 @@ class CommandExecutor():
 			except FileNotFoundError:
 				return False
 		if type == CommandType.EXECUTE_UPDATE_FILE:
-			cmd = getattr(self, "_execute_update_{}".format(get_platform_name_short()))
+			cmd = getattr(self, f"_execute_update_{get_platform_name_short()}")
 			return cmd(*arg)
 
 	def _run_platform_agnostic_command(self, cmd, stdin):
@@ -35,5 +36,4 @@ class CommandExecutor():
 
 	def _execute_update_mac(self, folder, app_name, version):
 		path = os.path.join(folder, app_name+"-"+version+".pkg")
-		return subprocess.call("osascript -e 'do shell script \"installer -pkg \\\"{0}\\\" -target /\" with prompt \"{1} WANTS TO make changes\" with administrator privileges'".format(path, app_name), shell=True) == 0
-
+		return subprocess.call(f"osascript -e 'do shell script \"installer -pkg \\\"{path}\\\" -target /\" with prompt \"{app_name} WANTS TO make changes\" with administrator privileges'", shell=True) == 0

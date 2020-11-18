@@ -1,13 +1,15 @@
-import sys
-import os
 import json
 import logging
+import os
+import sys
 
 import paramiko
-from scp import SCPClient, SCPException
+from scp import SCPClient
+from scp import SCPException
 
 from justupdate.core import data_manager
-from justupdate.core.base import JustUpdateConstants, prompt
+from justupdate.core.base import JustUpdateConstants
+from justupdate.core.base import prompt
 
 class UploadManager():
 	def __init__(self):
@@ -18,7 +20,7 @@ class UploadManager():
 	
 	def register_upload_service(self, name, service):
 		if issubclass(service, UploaderBase) == False:
-			raise ValueError("\"{}\" most inherit from \"UploaderBase\".".format(service))
+			raise ValueError(f"\"{service}\" most inherit from \"UploaderBase\".")
 		self.upload_services[name] = service
 	
 	def get_upload_service(self, name):
@@ -124,7 +126,7 @@ class SCPUploader(UploaderBase):
 			logging.info("Disconnected.")
 	
 	def _progress(self, filename, size, sent):
-		sys.stdout.write("%.2f - %s \r" % (float(sent)/float(size)*100, filename.decode()))
+		sys.stdout.write("{:.2f} - {} \r".format(float(sent)/float(size)*100, filename.decode()))
 	
 	def _fill_out_credentials(self):
 		logging.info("SCPUploader credentials setup.")

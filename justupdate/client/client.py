@@ -1,8 +1,8 @@
-import shutil
-import os
-import json
-import threading
 import hashlib
+import json
+import os
+import shutil
+import threading
 
 import requests
 import requests_cache
@@ -88,7 +88,7 @@ class JustUpdateClient():
 			bypass_metadata_cache (bool) : Bypass the available cache for the metadata, True to force redownload of metadata, False to use cache. (Default False).
 		"""
 		if self.channel not in ("stable", "beta", "alpha"):
-			raise InvalidUpdateChannelException("\"{} is an invalid update channel. Available channels are alpha, beta and stable.".format(channel))
+			raise InvalidUpdateChannelException(f"\"{channel} is an invalid update channel. Available channels are alpha, beta and stable.")
 		current_version = Version(self.current_version)
 		try:
 			self._metadata = self._load_metadata(bypass_metadata_cache)
@@ -152,7 +152,7 @@ class JustUpdateClient():
 	def _load_metadata(self, bypass_metadata_cache_cache):
 		md = ""
 		try:
-			md = self._download_metadata("metadata-{}.ju".format(get_platform_name_short()), bypass_metadata_cache_cache)
+			md = self._download_metadata(f"metadata-{get_platform_name_short()}.ju", bypass_metadata_cache_cache)
 		except requests.ConnectTimeout:
 			return None
 		except:
@@ -205,6 +205,3 @@ class JustUpdateClient():
 			if checksum != downloaded_checksum.hexdigest():
 				raise ChecksumValidationError(file)
 		return local_filename
-
-
-

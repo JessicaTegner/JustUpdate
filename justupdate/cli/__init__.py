@@ -2,9 +2,10 @@ import logging
 import sys
 
 from justupdate import __version__
-from justupdate.cli.helper import get_parser, setup_logging, setup_logging_debug
-
 from justupdate.cli import commands
+from justupdate.cli.helper import get_parser
+from justupdate.cli.helper import setup_logging
+from justupdate.cli.helper import setup_logging_debug
 
 def _real_main(args):
 	parser = get_parser()
@@ -13,7 +14,7 @@ def _real_main(args):
 		setup_logging_debug()
 	else:
 		setup_logging()
-	logging.info("JustUpdate - {}.".format(__version__))
+	logging.info(f"JustUpdate - {__version__}.")
 	if args.debug:
 		logging.info("Debug mode on.")
 	result = dispatch_command(args, extra)

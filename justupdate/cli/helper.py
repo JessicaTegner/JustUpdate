@@ -1,7 +1,7 @@
-import logging
-from logging.config import dictConfig
-import time
 import argparse
+import logging
+import time
+from logging.config import dictConfig
 
 def setup_logging_debug():
 	logging.getLogger().name = "JustUpdate"

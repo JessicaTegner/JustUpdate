@@ -1,6 +1,5 @@
 """these tests, test the "justupdate.client" module"""
 from . import util
-
 from justupdate.client.client import JustUpdateClient
 
 class DummyClientConfig():
@@ -34,4 +33,3 @@ def test_post_update():
 def test_cleanup():
 	client = JustUpdateClient(DummyClientConfig(), version, channel)
 	assert client.cleanup() == True
-

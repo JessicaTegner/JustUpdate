@@ -10,21 +10,21 @@ class Version():
 		if len(self.raw_version) == 5:
 			return "{0}.{1}.{2}.{4}".format(*self.raw_version)
 		if len(self.raw_version) == 4:
-			return "{0}.{1}.{2}.{3}".format(*self.raw_version)
+			return "{}.{}.{}.{}".format(*self.raw_version)
 		if len(self.raw_version) == 3:
-			return "{0}.{1}.{2}.0".format(*self.raw_version)
+			return "{}.{}.{}.0".format(*self.raw_version)
 	
 	def to_mac_compliant(self):
-			return "{0}.{1}.{2}".format(*self.raw_version)
+			return "{}.{}.{}".format(*self.raw_version)
 		
 	
 	def to_string(self):
 		if len(self.raw_version) == 5:
 			return "{0}.{1}.{2}a{4}".format(*self.raw_version)
 		if len(self.raw_version) == 4:
-			return "{0}.{1}.{2}b{3}".format(*self.raw_version)
+			return "{}.{}.{}b{}".format(*self.raw_version)
 		if len(self.raw_version) == 3:
-			return "{0}.{1}.{2}".format(*self.raw_version)
+			return "{}.{}.{}".format(*self.raw_version)
 	
 	def from_string(self, version):
 		tmp_version = version.replace("alpha", ".0.").replace("beta", ".").replace("a", ".0.").replace("b", ".").split(".")
@@ -42,9 +42,9 @@ class Version():
 		if len(self.raw_version) == 5:
 			return "{0}.{1}.{2} alpha {4}".format(*self.raw_version)
 		if len(self.raw_version) == 4:
-			return "{0}.{1}.{2} beta {3}".format(*self.raw_version)
+			return "{}.{}.{} beta {}".format(*self.raw_version)
 		if len(self.raw_version) == 3:
-			return "{0}.{1}.{2}".format(*self.raw_version)
+			return "{}.{}.{}".format(*self.raw_version)
 	
 	def _converted_raw_version(self):
 		return list(map(int, self.raw_version))
@@ -68,4 +68,3 @@ class Version():
 		if self.is_beta == True and other.is_stable == True:
 			return True
 		return self._converted_raw_version() < other._converted_raw_version()
-

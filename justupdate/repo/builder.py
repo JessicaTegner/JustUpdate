@@ -1,11 +1,13 @@
-import shutil
+import io
 import logging
 import os
-import io
+import shutil
 
-from justupdate.core.base import JustUpdateConstants, get_platform_name_short
+from justupdate.core.base import get_platform_name_short
+from justupdate.core.base import JustUpdateConstants
 from justupdate.core.config import Config
-from justupdate.core.executor import CommandExecutor, CommandType
+from justupdate.core.executor import CommandExecutor
+from justupdate.core.executor import CommandType
 
 class Builder():
 	def __init__(self):
@@ -17,7 +19,7 @@ class Builder():
 			shutil.rmtree(os.path.join(JustUpdateConstants.REPO_FOLDER, "work"))
 		except FileNotFoundError:
 			pass # It's ok if the folder doesn't exist.
-		cmd = getattr(self, "_clean_{}".format(get_platform_name_short()))
+		cmd = getattr(self, f"_clean_{get_platform_name_short()}")
 		return cmd()
 	
 	def _clean_win(self):
@@ -53,7 +55,7 @@ class Builder():
 		return result == 0
 	
 	def post_build(self):
-		cmd = getattr(self, "_post_build_{}".format(get_platform_name_short()))
+		cmd = getattr(self, f"_post_build_{get_platform_name_short()}")
 		return cmd()
 	
 	def _post_build_win(self):
@@ -63,12 +65,12 @@ class Builder():
 		app_name = self.config.get("app_name")
 		# First look for .exe.manifest, and rename that if it exists.
 		try:
-			os.rename(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", "win.exe.manifest"), os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", "{}.exe.manifest".format(app_name)))
+			os.rename(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", "win.exe.manifest"), os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", f"{app_name}.exe.manifest"))
 		except:
 			pass
 		# then try for the exe itself.
 		try:
-			os.rename(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", "win.exe"), os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", "{}.exe".format(app_name)))
+			os.rename(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", "win.exe"), os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "win", f"{app_name}.exe"))
 		except:
 			raise
 		logging.info("Done")
@@ -81,7 +83,7 @@ class Builder():
 			os.rename(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "mac.app", "Contents", "MacOS", "mac"), os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "mac.app", "Contents", "MacOS", self.config.get("app_name")))
 			os.rename(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "mac.app"), os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "{}.app".format(self.config.get("app_name"))))
 			# also temporary update the plist file (note it will be overwritten in commit, only reason to do this, is so the end developer can test the app before commiting).
-			with io.open(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "{}.app".format(self.config.get("app_name")), "Contents", "Info.plist"), "r", encoding="utf-8") as f:
+			with open(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "{}.app".format(self.config.get("app_name")), "Contents", "Info.plist"), encoding="utf-8") as f:
 				plist_data = f.readlines()
 			new_plist_data = []
 			for d in plist_data:
@@ -89,6 +91,6 @@ class Builder():
 					new_plist_data.append(d.replace("mac", self.config.get("app_name")))
 				else:
 					new_plist_data.append(d)
-			with io.open(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "{}.app".format(self.config.get("app_name")), "Contents", "Info.plist"), "w", encoding="utf-8") as f:
+			with open(os.path.join(JustUpdateConstants.REPO_FOLDER, "dist", "{}.app".format(self.config.get("app_name")), "Contents", "Info.plist"), "w", encoding="utf-8") as f:
 				for d in new_plist_data:
 					f.write(d)
