@@ -10,8 +10,8 @@ defaults:
 jobs:
   tester:
     strategy:
+      fail-fast: false
       matrix:
-        fail-fast: false
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
     runs-on: ${{ matrix.os }}
