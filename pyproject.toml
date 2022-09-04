@@ -16,11 +16,11 @@ include = ["readme.md", "docs/docs/*"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
-appdirs = "^1.4.4"
-scp = "^0.13.3"
-paramiko = "^2.7.2"
-requests = "^2.25.0"
-requests-cache = "^0.5.2"
+appdirs = "^1.4"
+scp = "^0.13"
+paramiko = "^2.7"
+requests = "^2"
+requests-cache = "^0.5"
 pyinstaller = "^4.1"
 
 [tool.poetry.dev-dependencies]
