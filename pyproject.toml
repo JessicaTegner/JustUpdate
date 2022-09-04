@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "justupdate"
-version = "1.3.9"
+version = "1.3.10"
 description = ""
 authors = ["JessicaTegner <jessica.tegner@outlook.com>"]
 license = "mit"
